@@ -85,6 +85,7 @@ namespace Grafy
             resources.ApplyResources(this.btn_deletehranu, "btn_deletehranu");
             this.btn_deletehranu.Name = "btn_deletehranu";
             this.btn_deletehranu.UseVisualStyleBackColor = true;
+            this.btn_deletehranu.Click += new System.EventHandler(this.btn_deletehranu_Click);
             // 
             // nup_start
             // 

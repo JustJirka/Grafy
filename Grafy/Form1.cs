@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Grafy
 {
     public partial class form_main : Form
     {
-        private Graf Grafy = new Graf(5);
+        //private Graf Grafy = new Graf(5);
         private Vykreslovani Vykresleni = new Vykreslovani();
         string mode = "";
         int hrany;
@@ -33,7 +26,7 @@ namespace Grafy
 
         private void picbx_grafy_MouseClick(object sender, MouseEventArgs e)
         {
-            if (mode=="addbod")
+            if (mode == "addbod")
             {
                 Vykresleni.AddBod(e.X, e.Y);
             }
@@ -44,7 +37,7 @@ namespace Grafy
             else if (mode == "addhranu")
             {
                 int bod = Vykresleni.Najdibod(e.X, e.Y);
-                if (bod!=-1)
+                if (bod != -1)
                 {
                     hrany = bod;
                     mode = "addhranu2";
@@ -53,13 +46,17 @@ namespace Grafy
             else if (mode == "addhranu2")
             {
                 int bod2 = Vykresleni.Najdibod(e.X, e.Y);
-                if (bod2 != -1)
+                if (bod2 != -1 && hrany != bod2)
                 {
-                    Vykresleni.AddHranu(hrany,bod2);
+                    Vykresleni.AddHranu(hrany, bod2);
                     hrany = -1;
-                    mode = "addhranu"; 
+                    mode = "addhranu";
                 }
 
+            }
+            else if (mode == "removehranu")
+            {
+                Vykresleni.RmHranu(e.X, e.Y);
             }
             picbx_grafy.Refresh();
         }
@@ -72,6 +69,11 @@ namespace Grafy
         private void btn_addhranu_Click(object sender, EventArgs e)
         {
             mode = "addhranu";
+        }
+
+        private void btn_deletehranu_Click(object sender, EventArgs e)
+        {
+            mode = "removehranu";
         }
     }
 }
