@@ -112,6 +112,7 @@ namespace Grafy
             resources.ApplyResources(this.btn_visual, "btn_visual");
             this.btn_visual.Name = "btn_visual";
             this.btn_visual.UseVisualStyleBackColor = true;
+            this.btn_visual.Click += new System.EventHandler(this.btn_visual_Click);
             // 
             // form_main
             // 

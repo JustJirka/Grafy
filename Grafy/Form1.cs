@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Grafy
 {
     public partial class form_main : Form
     {
-        //private Graf Grafy = new Graf(5);
         private Vykreslovani Vykresleni = new Vykreslovani();
         string mode = "";
         int hrany;
@@ -74,6 +74,15 @@ namespace Grafy
         private void btn_deletehranu_Click(object sender, EventArgs e)
         {
             mode = "removehranu";
+        }
+
+        private void btn_visual_Click(object sender, EventArgs e)
+        {
+            List<int> vypis = Vykresleni.startDFS( Convert.ToInt32(nup_start.Value),Convert.ToInt32(nup_cil.Value));
+            for (int i = 0; i < vypis.Count; i++)
+            {
+                txtbx_debug.Text += vypis[i] + " => ";
+            }
         }
     }
 }

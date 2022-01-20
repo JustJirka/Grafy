@@ -13,6 +13,7 @@ namespace Grafy
         List<List<int>> spojeni = new List<List<int>>();
         int velikost = 50;
         int line_thick = 10;
+        int pocet_spoju;
         public Vykreslovani()
         {
         }
@@ -36,10 +37,26 @@ namespace Grafy
             int pozice = Najdibod(x, y);
             if (pozice != -1)
             {
-                Bod[pozice][0] = Bod[pozice][1] = -1;
-                List<int> pridej = new List<int>();
-                pridej.Add(-1);
-                spojeni[pozice] = pridej;
+                Bod.RemoveAt(pozice);
+                spojeni.RemoveAt(pozice);
+            }
+            for (int i = 0; i < spojeni.Count(); i++)
+            {
+                int delka = spojeni[i].Count();
+                for (int j = 0; j < delka; j++)
+                {
+                    if (spojeni[i][j] == pozice)
+                    {
+                        if (spojeni[i].Count() > 1) spojeni[i].RemoveAt(j);
+                        else spojeni[i][0] = -1;
+                        delka--;
+                        j--;
+                    }
+                    else if (spojeni[i][j] > pozice)
+                    {
+                        spojeni[i][j]--;
+                    }
+                }
             }
         }
         public void RmHranu(int x, int y)
@@ -71,6 +88,7 @@ namespace Grafy
         }
         public void Vykresli(Graphics g)
         {
+            pocet_spoju = 0;
             Brush brush_normalni = Brushes.Green;
             Brush brush_text = Brushes.Black;
             Pen pen_normalni = new Pen(Brushes.DeepSkyBlue, line_thick);
@@ -81,37 +99,28 @@ namespace Grafy
             {
                 if (spojeni[i][0] != -1)
                 {
-                    int delka = spojeni[i].Count();
-                    for (int j = 0; j < delka; j++)
+                    for (int j = 0; j < spojeni[i].Count(); j++)
                     {
-                        if (Bod[spojeni[i][j]][0] == -1)
+                        g.DrawLine(pen_normalni, Bod[i][0], Bod[i][1], Bod[spojeni[i][j]][0], Bod[spojeni[i][j]][1]);
+                        double d = Math.Sqrt(Math.Pow(Bod[i][0] - Bod[spojeni[i][j]][0], 2) + Math.Pow(Bod[i][1] - Bod[spojeni[i][j]][1], 2));
+                        int x2 = Convert.ToInt32(Bod[i][0] - ((25 * (Bod[i][0] - Bod[spojeni[i][j]][0])) / d));
+                        int y2 = Convert.ToInt32(Bod[i][1] - ((25 * (Bod[i][1] - Bod[spojeni[i][j]][1])) / d));
+                        float vx = Bod[spojeni[i][j]][0] - x2;
+                        float vy = Bod[spojeni[i][j]][1] - y2;
+                        float dist = (float)Math.Sqrt(vx * vx + vy * vy);
+                        vx /= dist;
+                        vy /= dist;
+                        float ax = delka_sipky * (vy + vx);
+                        float ay = delka_sipky * (-vx + vy);
+                        PointF[] points =
                         {
-                            if (spojeni[i].Count()>1) spojeni[i].RemoveAt(j);
-                            else spojeni[i][0] = -1;
-                            delka--;
-                            j--;
-                        }
-                        else
-                        {
-                            g.DrawLine(pen_normalni, Bod[i][0], Bod[i][1], Bod[spojeni[i][j]][0], Bod[spojeni[i][j]][1]);
-                            double d = Math.Sqrt(Math.Pow(Bod[i][0] - Bod[spojeni[i][j]][0], 2) + Math.Pow(Bod[i][1] - Bod[spojeni[i][j]][1], 2));
-                            int x2 = Convert.ToInt32(Bod[i][0] - ((25 * (Bod[i][0] - Bod[spojeni[i][j]][0])) / d));
-                            int y2 = Convert.ToInt32(Bod[i][1] - ((25 * (Bod[i][1] - Bod[spojeni[i][j]][1])) / d));
-                            float vx = Bod[spojeni[i][j]][0] - x2;
-                            float vy = Bod[spojeni[i][j]][1] - y2;
-                            float dist = (float)Math.Sqrt(vx * vx + vy * vy);
-                            vx /= dist;
-                            vy /= dist;
-                            float ax = delka_sipky * (vy + vx);
-                            float ay = delka_sipky * (-vx + vy);
-                            PointF[] points =
-                            {
                                 new PointF(x2 + ax, y2 + ay),
                                 new PointF(x2, y2),
                                 new PointF(x2 - ay, y2 + ax)
-                            };
-                            g.DrawLines(pen_normalni, points);
-                        }
+                        };
+                        g.DrawLines(pen_normalni, points);
+                        pocet_spoju++;
+
                     }
                 }
             }
@@ -124,5 +133,19 @@ namespace Grafy
                 }
             }
         }
+        public List<int> startDFS(int start, int end)
+        {
+            Graf Grafy = new Graf(pocet_spoju);
+            for (int i = 0; i < spojeni.Count(); i++)
+            {
+                for (int j = 0; j < spojeni[i].Count(); j++)
+                {
+                    if (spojeni[i][j]!=-1) Grafy.AddEdge(i, spojeni[i][j]);
+                }
+            }
+            return Grafy.DFS(start, end);
+        }
     }
-};
+}
+
+
