@@ -10,8 +10,9 @@ namespace Grafy
     class Graf
     {
         LinkedList<int>[] linkedListArray;
-        List<int> vypis = new List<int>();
+        List<int[]> vypis = new List<int[]>();
         int konec;
+        bool najito = false;
         public Graf(int v)
         {
             linkedListArray = new LinkedList<int>[v];
@@ -36,17 +37,22 @@ namespace Grafy
             {
                 foreach (var item in linkedListArray[src])
                 {
-                    if (item != konec) break;
-                    else if (!visited[item])
-                    {
-                        vypis.Add(src);
-                        vypis.Add(item);
-                        DFSHelper(item, visited);
+                    if (!najito) { 
+                        int[] souradnice = new int[2];
+                        souradnice[0] = src;
+                        souradnice[1] = item;
+                        vypis.Add(souradnice); 
                     }
+                    if (item == konec) 
+                    {
+                        najito = true;
+                        break; 
+                    }
+                    else if (!visited[item]) DFSHelper(item, visited);
                 }
             }
         }
-        public List<int> DFS(int start, int end)
+        public List<int[]> DFS(int start, int end)
         {
             bool[] visited = new bool[linkedListArray.Length + 1];
             konec = end;

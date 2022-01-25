@@ -4,36 +4,31 @@ using System.Collections.Generic;
 
 namespace Grafy
 {
-    public partial class form_main : Form
+    public partial class Form_main : Form
     {
         private Vykreslovani Vykresleni = new Vykreslovani();
         string mode = "";
         int hrany;
-        public form_main()
+        public Form_main()
         {
             InitializeComponent();
         }
 
-        private void btn_addbod_Click(object sender, EventArgs e)
+        private void Btn_addbod_Click(object sender, EventArgs e)
         {
             mode = "addbod";
         }
 
-        private void btn_deletebod_Click(object sender, EventArgs e)
+        private void Btn_deletebod_Click(object sender, EventArgs e)
         {
             mode = "removebod";
         }
 
-        private void picbx_grafy_MouseClick(object sender, MouseEventArgs e)
+        private void Picbx_grafy_MouseClick(object sender, MouseEventArgs e)
         {
-            if (mode == "addbod")
-            {
-                Vykresleni.AddBod(e.X, e.Y);
-            }
-            else if (mode == "removebod")
-            {
-                Vykresleni.RmBod(e.X, e.Y);
-            }
+            if (mode == "addbod") Vykresleni.AddBod(e.X, e.Y);
+            else if (mode == "removebod") Vykresleni.RmBod(e.X, e.Y);
+            else if (mode == "removehranu") Vykresleni.RmHranu(e.X, e.Y);
             else if (mode == "addhranu")
             {
                 int bod = Vykresleni.Najdibod(e.X, e.Y);
@@ -52,37 +47,36 @@ namespace Grafy
                     hrany = -1;
                     mode = "addhranu";
                 }
-
-            }
-            else if (mode == "removehranu")
-            {
-                Vykresleni.RmHranu(e.X, e.Y);
             }
             picbx_grafy.Refresh();
         }
 
-        private void picbx_grafy_Paint(object sender, PaintEventArgs e)
+        private void Picbx_grafy_Paint(object sender, PaintEventArgs e)
         {
-            Vykresleni.Vykresli(e.Graphics);
+            nup_cil.Maximum = nup_start.Maximum = Vykresleni.Vykresli(e.Graphics);
         }
 
-        private void btn_addhranu_Click(object sender, EventArgs e)
+        private void Btn_addhranu_Click(object sender, EventArgs e)
         {
             mode = "addhranu";
         }
 
-        private void btn_deletehranu_Click(object sender, EventArgs e)
+        private void Btn_deletehranu_Click(object sender, EventArgs e)
         {
             mode = "removehranu";
         }
 
-        private void btn_visual_Click(object sender, EventArgs e)
+        private void Btn_visual_Click(object sender, EventArgs e)
         {
-            List<int> vypis = Vykresleni.startDFS( Convert.ToInt32(nup_start.Value),Convert.ToInt32(nup_cil.Value));
-            for (int i = 0; i < vypis.Count; i++)
-            {
-                txtbx_debug.Text += vypis[i] + " => ";
-            }
+            List<int[]> vypis = Vykresleni.StartDFS(Convert.ToInt32(nup_start.Value), Convert.ToInt32(nup_cil.Value));
+            for (int i = 0; i < vypis.Count; i++) txtbx_debug.Text += vypis[i][0] + " => " + vypis[i][1] + ", ";
+            tim_viz.Start();
+        }
+
+        private void Tim_viz_Tick(object sender, EventArgs e)
+        {
+            if (Vykresleni.Vizualiz()) tim_viz.Stop();
+            picbx_grafy.Refresh();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace Grafy
 {
-    partial class form_main
+    partial class Form_main
     {
         /// <summary>
         /// Vyžaduje se proměnná návrháře.
@@ -29,7 +29,7 @@ namespace Grafy
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form_main));
+            this.components = new System.ComponentModel.Container();
             this.picbx_grafy = new System.Windows.Forms.PictureBox();
             this.txtbx_debug = new System.Windows.Forms.TextBox();
             this.btn_addbod = new System.Windows.Forms.Button();
@@ -41,6 +41,7 @@ namespace Grafy
             this.lbl_start = new System.Windows.Forms.Label();
             this.lbl_cil = new System.Windows.Forms.Label();
             this.btn_visual = new System.Windows.Forms.Button();
+            this.tim_viz = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.picbx_grafy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_start)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_cil)).BeginInit();
@@ -48,76 +49,114 @@ namespace Grafy
             // 
             // picbx_grafy
             // 
-            resources.ApplyResources(this.picbx_grafy, "picbx_grafy");
+            this.picbx_grafy.Location = new System.Drawing.Point(12, 12);
             this.picbx_grafy.Name = "picbx_grafy";
+            this.picbx_grafy.Size = new System.Drawing.Size(832, 602);
+            this.picbx_grafy.TabIndex = 0;
             this.picbx_grafy.TabStop = false;
-            this.picbx_grafy.Paint += new System.Windows.Forms.PaintEventHandler(this.picbx_grafy_Paint);
-            this.picbx_grafy.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picbx_grafy_MouseClick);
+            this.picbx_grafy.Paint += new System.Windows.Forms.PaintEventHandler(this.Picbx_grafy_Paint);
+            this.picbx_grafy.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Picbx_grafy_MouseClick);
             // 
             // txtbx_debug
             // 
-            resources.ApplyResources(this.txtbx_debug, "txtbx_debug");
+            this.txtbx_debug.Location = new System.Drawing.Point(850, 12);
+            this.txtbx_debug.Multiline = true;
             this.txtbx_debug.Name = "txtbx_debug";
+            this.txtbx_debug.Size = new System.Drawing.Size(229, 461);
+            this.txtbx_debug.TabIndex = 1;
             // 
             // btn_addbod
             // 
-            resources.ApplyResources(this.btn_addbod, "btn_addbod");
+            this.btn_addbod.Location = new System.Drawing.Point(923, 479);
             this.btn_addbod.Name = "btn_addbod";
+            this.btn_addbod.Size = new System.Drawing.Size(75, 23);
+            this.btn_addbod.TabIndex = 2;
+            this.btn_addbod.Text = "Přidej bod";
             this.btn_addbod.UseVisualStyleBackColor = true;
-            this.btn_addbod.Click += new System.EventHandler(this.btn_addbod_Click);
+            this.btn_addbod.Click += new System.EventHandler(this.Btn_addbod_Click);
             // 
             // btn_addhranu
             // 
-            resources.ApplyResources(this.btn_addhranu, "btn_addhranu");
+            this.btn_addhranu.Location = new System.Drawing.Point(923, 508);
             this.btn_addhranu.Name = "btn_addhranu";
+            this.btn_addhranu.Size = new System.Drawing.Size(75, 23);
+            this.btn_addhranu.TabIndex = 3;
+            this.btn_addhranu.Text = "Přidej Hranu";
             this.btn_addhranu.UseVisualStyleBackColor = true;
-            this.btn_addhranu.Click += new System.EventHandler(this.btn_addhranu_Click);
+            this.btn_addhranu.Click += new System.EventHandler(this.Btn_addhranu_Click);
             // 
             // btn_deletebod
             // 
-            resources.ApplyResources(this.btn_deletebod, "btn_deletebod");
+            this.btn_deletebod.Location = new System.Drawing.Point(1004, 477);
             this.btn_deletebod.Name = "btn_deletebod";
+            this.btn_deletebod.Size = new System.Drawing.Size(75, 23);
+            this.btn_deletebod.TabIndex = 4;
+            this.btn_deletebod.Text = "Smaž bod";
             this.btn_deletebod.UseVisualStyleBackColor = true;
-            this.btn_deletebod.Click += new System.EventHandler(this.btn_deletebod_Click);
+            this.btn_deletebod.Click += new System.EventHandler(this.Btn_deletebod_Click);
             // 
             // btn_deletehranu
             // 
-            resources.ApplyResources(this.btn_deletehranu, "btn_deletehranu");
+            this.btn_deletehranu.Location = new System.Drawing.Point(1004, 506);
             this.btn_deletehranu.Name = "btn_deletehranu";
+            this.btn_deletehranu.Size = new System.Drawing.Size(75, 23);
+            this.btn_deletehranu.TabIndex = 5;
+            this.btn_deletehranu.Text = "Smaž hranu";
             this.btn_deletehranu.UseVisualStyleBackColor = true;
-            this.btn_deletehranu.Click += new System.EventHandler(this.btn_deletehranu_Click);
+            this.btn_deletehranu.Click += new System.EventHandler(this.Btn_deletehranu_Click);
             // 
             // nup_start
             // 
-            resources.ApplyResources(this.nup_start, "nup_start");
+            this.nup_start.Location = new System.Drawing.Point(1004, 537);
             this.nup_start.Name = "nup_start";
+            this.nup_start.Size = new System.Drawing.Size(75, 20);
+            this.nup_start.TabIndex = 6;
             // 
             // nup_cil
             // 
-            resources.ApplyResources(this.nup_cil, "nup_cil");
+            this.nup_cil.Location = new System.Drawing.Point(1004, 563);
             this.nup_cil.Name = "nup_cil";
+            this.nup_cil.Size = new System.Drawing.Size(75, 20);
+            this.nup_cil.TabIndex = 7;
             // 
             // lbl_start
             // 
-            resources.ApplyResources(this.lbl_start, "lbl_start");
+            this.lbl_start.AutoSize = true;
+            this.lbl_start.Location = new System.Drawing.Point(926, 539);
             this.lbl_start.Name = "lbl_start";
+            this.lbl_start.Size = new System.Drawing.Size(72, 13);
+            this.lbl_start.TabIndex = 8;
+            this.lbl_start.Text = "Startovní bod";
             // 
             // lbl_cil
             // 
-            resources.ApplyResources(this.lbl_cil, "lbl_cil");
+            this.lbl_cil.AutoSize = true;
+            this.lbl_cil.Location = new System.Drawing.Point(940, 565);
             this.lbl_cil.Name = "lbl_cil";
+            this.lbl_cil.Size = new System.Drawing.Size(58, 13);
+            this.lbl_cil.TabIndex = 9;
+            this.lbl_cil.Text = "Cílový bod";
             // 
             // btn_visual
             // 
-            resources.ApplyResources(this.btn_visual, "btn_visual");
+            this.btn_visual.Location = new System.Drawing.Point(923, 589);
             this.btn_visual.Name = "btn_visual";
+            this.btn_visual.Size = new System.Drawing.Size(156, 25);
+            this.btn_visual.TabIndex = 10;
+            this.btn_visual.Text = "Začni vizualiaci";
             this.btn_visual.UseVisualStyleBackColor = true;
-            this.btn_visual.Click += new System.EventHandler(this.btn_visual_Click);
+            this.btn_visual.Click += new System.EventHandler(this.Btn_visual_Click);
             // 
-            // form_main
+            // tim_viz
             // 
-            resources.ApplyResources(this, "$this");
+            this.tim_viz.Interval = 1000;
+            this.tim_viz.Tick += new System.EventHandler(this.Tim_viz_Tick);
+            // 
+            // Form_main
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1091, 638);
             this.Controls.Add(this.btn_visual);
             this.Controls.Add(this.lbl_cil);
             this.Controls.Add(this.lbl_start);
@@ -129,7 +168,8 @@ namespace Grafy
             this.Controls.Add(this.btn_addbod);
             this.Controls.Add(this.txtbx_debug);
             this.Controls.Add(this.picbx_grafy);
-            this.Name = "form_main";
+            this.Name = "Form_main";
+            this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.picbx_grafy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_start)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_cil)).EndInit();
@@ -151,6 +191,7 @@ namespace Grafy
         private System.Windows.Forms.Label lbl_start;
         private System.Windows.Forms.Label lbl_cil;
         private System.Windows.Forms.Button btn_visual;
+        private System.Windows.Forms.Timer tim_viz;
     }
 }
 
