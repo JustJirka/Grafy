@@ -6,7 +6,7 @@ namespace Grafy
 {
     public partial class Form_main : Form
     {
-        private Vykreslovani Vykresleni = new Vykreslovani();
+        Vykreslovani Vykresleni = new Vykreslovani();
         string mode = "";
         int hrany;
         public Form_main()
@@ -53,7 +53,9 @@ namespace Grafy
 
         private void Picbx_grafy_Paint(object sender, PaintEventArgs e)
         {
-            nup_cil.Maximum = nup_start.Maximum = Vykresleni.Vykresli(e.Graphics);
+            int pocet =Vykresleni.Vykresli(e.Graphics);
+            if (pocet > 0) pocet--;
+            nup_cil.Maximum = nup_start.Maximum = pocet;
         }
 
         private void Btn_addhranu_Click(object sender, EventArgs e)
@@ -68,15 +70,22 @@ namespace Grafy
 
         private void Btn_visual_Click(object sender, EventArgs e)
         {
-            List<int[]> vypis = Vykresleni.StartDFS(Convert.ToInt32(nup_start.Value), Convert.ToInt32(nup_cil.Value));
+            List<int[]> vypis = Vykresleni.Startviz(Convert.ToInt32(nup_start.Value), Convert.ToInt32(nup_cil.Value), true);
             for (int i = 0; i < vypis.Count; i++) txtbx_debug.Text += vypis[i][0] + " => " + vypis[i][1] + ", ";
             tim_viz.Start();
         }
 
         private void Tim_viz_Tick(object sender, EventArgs e)
         {
-            if (Vykresleni.Vizualiz()) tim_viz.Stop();
             picbx_grafy.Refresh();
+            if (Vykresleni.Vizualiz()) tim_viz.Stop();
+        }
+
+        private void StartBSF_Click(object sender, EventArgs e)
+        {
+            List<int[]> vypis = Vykresleni.Startviz(Convert.ToInt32(nup_start.Value), Convert.ToInt32(nup_cil.Value), false);
+            for (int i = 0; i < vypis.Count; i++) txtbx_debug.Text += vypis[i][0] + " => " + vypis[i][1] + ", ";
+            tim_viz.Start();
         }
     }
 }

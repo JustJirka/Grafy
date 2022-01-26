@@ -42,6 +42,7 @@ namespace Grafy
             this.lbl_cil = new System.Windows.Forms.Label();
             this.btn_visual = new System.Windows.Forms.Button();
             this.tim_viz = new System.Windows.Forms.Timer(this.components);
+            this.startBSF = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picbx_grafy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_start)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_cil)).BeginInit();
@@ -139,11 +140,11 @@ namespace Grafy
             // 
             // btn_visual
             // 
-            this.btn_visual.Location = new System.Drawing.Point(923, 589);
+            this.btn_visual.Location = new System.Drawing.Point(1004, 589);
             this.btn_visual.Name = "btn_visual";
-            this.btn_visual.Size = new System.Drawing.Size(156, 25);
+            this.btn_visual.Size = new System.Drawing.Size(75, 25);
             this.btn_visual.TabIndex = 10;
-            this.btn_visual.Text = "Začni vizualiaci";
+            this.btn_visual.Text = "DFS";
             this.btn_visual.UseVisualStyleBackColor = true;
             this.btn_visual.Click += new System.EventHandler(this.Btn_visual_Click);
             // 
@@ -152,11 +153,22 @@ namespace Grafy
             this.tim_viz.Interval = 1000;
             this.tim_viz.Tick += new System.EventHandler(this.Tim_viz_Tick);
             // 
+            // startBSF
+            // 
+            this.startBSF.Location = new System.Drawing.Point(923, 591);
+            this.startBSF.Name = "startBSF";
+            this.startBSF.Size = new System.Drawing.Size(75, 23);
+            this.startBSF.TabIndex = 11;
+            this.startBSF.Text = "BFS";
+            this.startBSF.UseVisualStyleBackColor = true;
+            this.startBSF.Click += new System.EventHandler(this.StartBSF_Click);
+            // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1091, 638);
+            this.Controls.Add(this.startBSF);
             this.Controls.Add(this.btn_visual);
             this.Controls.Add(this.lbl_cil);
             this.Controls.Add(this.lbl_start);
@@ -192,6 +204,7 @@ namespace Grafy
         private System.Windows.Forms.Label lbl_cil;
         private System.Windows.Forms.Button btn_visual;
         private System.Windows.Forms.Timer tim_viz;
+        private System.Windows.Forms.Button startBSF;
     }
 }
 

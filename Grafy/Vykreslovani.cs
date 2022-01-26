@@ -15,9 +15,7 @@ namespace Grafy
         int velikost = 50;
         int line_thick = 10;
         int vizual = 0;
-        public Vykreslovani()
-        {
-        }
+        public Vykreslovani(){}
         public void AddBod(int x, int y)
         {
             int[] souradnice = new int[2];
@@ -104,7 +102,6 @@ namespace Grafy
             };
             g.DrawLines(pero, points);
             g.DrawLine(pero, kam[0], kam[1], odkud[0], odkud[1]);
-
         }
         public int Vykresli(Graphics g)
         {
@@ -132,7 +129,7 @@ namespace Grafy
             }
             return Bod.Count();
         }
-        public List<int[]> StartDFS(int start, int end)
+        public List<int[]> Startviz(int start, int end,bool dfs)
         {
             Graf Grafy = new Graf(spojeni.Count());
             for (int i = 0; i < spojeni.Count(); i++)
@@ -143,13 +140,19 @@ namespace Grafy
                 }
             }
             vizual = 0;
-            prosly = Grafy.DFS(start, end);
+            if(dfs)prosly = Grafy.DFS(start, end);
+            else prosly = Grafy.BFS(start, end);
             return prosly;
         }
         public bool Vizualiz()
         {
             if (vizual < prosly.Count()) vizual++;
-            else return true;
+            else 
+            {
+                prosly = new List<int[]>();
+                vizual = -1;
+                return true;
+            }
             return false;
         }
     }
