@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace Grafy
 {
@@ -53,7 +53,7 @@ namespace Grafy
 
         private void Picbx_grafy_Paint(object sender, PaintEventArgs e)
         {
-            int pocet =Vykresleni.Vykresli(e.Graphics);
+            int pocet = Vykresleni.Vykresli(e.Graphics);
             if (pocet > 0) pocet--;
             nup_cil.Maximum = nup_start.Maximum = pocet;
         }
@@ -84,6 +84,7 @@ namespace Grafy
         private void StartBSF_Click(object sender, EventArgs e)
         {
             List<int[]> vypis = Vykresleni.Startviz(Convert.ToInt32(nup_start.Value), Convert.ToInt32(nup_cil.Value), false);
+            txtbx_debug.Text = "";
             for (int i = 0; i < vypis.Count; i++) txtbx_debug.Text += vypis[i][0] + " => " + vypis[i][1] + ", ";
             tim_viz.Start();
         }

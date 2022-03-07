@@ -181,7 +181,7 @@ namespace Grafy
             this.Controls.Add(this.txtbx_debug);
             this.Controls.Add(this.picbx_grafy);
             this.Name = "Form_main";
-            this.Text = "Form1";
+            this.Text = "Grafy";
             ((System.ComponentModel.ISupportInitialize)(this.picbx_grafy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_start)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_cil)).EndInit();

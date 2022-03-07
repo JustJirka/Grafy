@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+using System.Collections.Generic;
 
 namespace Grafy
 {
@@ -13,7 +9,7 @@ namespace Grafy
         LinkedList<int>[] linkedListArray;
         List<int[]> vypis = new List<int[]>();
         int konec;
-        bool najito = false;
+        bool najito = false; 
         public Graf(int v)
         {
             linkedListArray = new LinkedList<int>[v];
@@ -38,16 +34,17 @@ namespace Grafy
             {
                 foreach (var item in linkedListArray[src])
                 {
-                    if (!najito) { 
+                    if (!najito)
+                    {
                         int[] souradnice = new int[2];
                         souradnice[0] = src;
                         souradnice[1] = item;
-                        vypis.Add(souradnice); 
+                        vypis.Add(souradnice);
                     }
-                    if (item == konec) 
+                    if (item == konec)
                     {
                         najito = true;
-                        break; 
+                        break;
                     }
                     else if (!visited[item]) DFSHelper(item, visited);
                 }
@@ -72,9 +69,9 @@ namespace Grafy
                         najito = true;
                         break;
                     }
-                    else if (!visited[item])  fronta.Enqueue(item);
+                    else if (!visited[item]) fronta.Enqueue(item);
                 }
-                if (!najito) BFSHelper(Convert.ToInt32(fronta.Dequeue()),fronta, visited);
+                if (!najito && fronta.Count > 0) BFSHelper(Convert.ToInt32(fronta.Dequeue()), fronta, visited);
             }
         }
         public List<int[]> DFS(int start, int end)
@@ -89,7 +86,8 @@ namespace Grafy
             bool[] visited = new bool[linkedListArray.Length + 1];
             Queue BFS = new Queue();
             konec = end;
-            BFSHelper(start, BFS,visited);
+            BFSHelper(start, BFS, visited);
+            while(BFS.Count>0 && !najito) BFSHelper(Convert.ToInt32(BFS.Dequeue()), BFS, visited);
             return vypis;
         }
     }

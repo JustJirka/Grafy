@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Drawing;
+using System.Linq;
 
 namespace Grafy
 {
@@ -15,7 +13,7 @@ namespace Grafy
         int velikost = 50;
         int line_thick = 10;
         int vizual = 0;
-        public Vykreslovani(){}
+        public Vykreslovani() { }
         public void AddBod(int x, int y)
         {
             int[] souradnice = new int[2];
@@ -42,7 +40,7 @@ namespace Grafy
             {
                 int delka = spojeni[i].Count();
                 for (int j = 0; j < delka; j++)
-                {
+                { 
                     if (spojeni[i][j] == pozice)
                     {
                         if (spojeni[i].Count() > 1) spojeni[i].RemoveAt(j);
@@ -129,7 +127,7 @@ namespace Grafy
             }
             return Bod.Count();
         }
-        public List<int[]> Startviz(int start, int end,bool dfs)
+        public List<int[]> Startviz(int start, int end, bool dfs)
         {
             Graf Grafy = new Graf(spojeni.Count());
             for (int i = 0; i < spojeni.Count(); i++)
@@ -140,14 +138,14 @@ namespace Grafy
                 }
             }
             vizual = 0;
-            if(dfs)prosly = Grafy.DFS(start, end);
+            if (dfs) prosly = Grafy.DFS(start, end);
             else prosly = Grafy.BFS(start, end);
             return prosly;
         }
         public bool Vizualiz()
         {
             if (vizual < prosly.Count()) vizual++;
-            else 
+            else
             {
                 prosly = new List<int[]>();
                 vizual = -1;
