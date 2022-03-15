@@ -8,13 +8,15 @@ namespace Grafy
     {
         LinkedList<int>[] linkedListArray;
         List<int[]> vypis = new List<int[]>();
+        bool[] visited;
+        Queue Fronta;
         int konec;
         bool najito = false; 
         public Graf(int v)
         {
             linkedListArray = new LinkedList<int>[v];
         }
-        public void AddEdge(int v, int u)
+        public void AddEdge(int u, int v)
         {
             if (linkedListArray[u] == null)
             {
@@ -27,67 +29,59 @@ namespace Grafy
                 linkedListArray[u].AddAfter(last, v);
             }
         }
-        internal void DFSHelper(int src, bool[] visited)
+        internal void DFSHelper(int src)
         {
             visited[src] = true;
             if (src != konec && linkedListArray[src] != null)
             {
                 foreach (var item in linkedListArray[src])
                 {
-                    if (!najito)
-                    {
-                        int[] souradnice = new int[2];
-                        souradnice[0] = src;
-                        souradnice[1] = item;
-                        vypis.Add(souradnice);
-                    }
+                    if (!najito && !visited[item]) vypis.Add(new int[2] { src, item });
                     if (item == konec)
                     {
                         najito = true;
+                        vypis.Add(new int[2] { src, item });
                         break;
                     }
-                    else if (!visited[item]) DFSHelper(item, visited);
+                    else if (!visited[item] && !najito) { DFSHelper(item); }
                 }
             }
         }
-        internal void BFSHelper(int src, Queue fronta, bool[] visited)
+        internal void BFSHelper(int src)
         {
-            visited[src] = true;
-            if (src != konec && linkedListArray[src] != null)
+            if (linkedListArray[src] != null/* && !visited[src]*/)
             {
+                //visited[src] = true;
                 foreach (var item in linkedListArray[src])
                 {
-                    if (!najito)
-                    {
-                        int[] souradnice = new int[2];
-                        souradnice[0] = src;
-                        souradnice[1] = item;
-                        vypis.Add(souradnice);
-                    }
                     if (item == konec)
                     {
                         najito = true;
-                        break;
+                        vypis.Add(new int[2] { src, item });
                     }
-                    else if (!visited[item]) fronta.Enqueue(item);
+                    else if (!najito && !visited[item])
+                    {
+                        visited[item] = true;
+                        vypis.Add(new int[2] { src, item });
+                        Fronta.Enqueue(item);
+                    }
                 }
-                if (!najito && fronta.Count > 0) BFSHelper(Convert.ToInt32(fronta.Dequeue()), fronta, visited);
             }
         }
         public List<int[]> DFS(int start, int end)
         {
-            bool[] visited = new bool[linkedListArray.Length + 1];
+            visited = new bool[linkedListArray.Length + 1];
             konec = end;
-            DFSHelper(start, visited);
+            DFSHelper(start);
             return vypis;
         }
         public List<int[]> BFS(int start, int end)
         {
-            bool[] visited = new bool[linkedListArray.Length + 1];
-            Queue BFS = new Queue();
+            visited = new bool[linkedListArray.Length + 1];
+            Fronta = new Queue();
             konec = end;
-            BFSHelper(start, BFS, visited);
-            while(BFS.Count>0 && !najito) BFSHelper(Convert.ToInt32(BFS.Dequeue()), BFS, visited);
+            BFSHelper(start);
+            while(Fronta.Count>0 && !najito) BFSHelper(Convert.ToInt32(Fronta.Dequeue()));
             return vypis;
         }
     }

@@ -16,7 +16,7 @@ namespace Grafy
 
         private void Btn_addbod_Click(object sender, EventArgs e)
         {
-            mode = "addbod";
+            mode =  "addbod";
         }
 
         private void Btn_deletebod_Click(object sender, EventArgs e)
