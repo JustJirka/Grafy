@@ -55,7 +55,7 @@ namespace Grafy
         {
             int pocet = Vykresleni.Vykresli(e.Graphics);
             if (pocet > 0) pocet--;
-            nup_cil.Maximum = nup_start.Maximum = pocet;
+            nup_start.Maximum = pocet;
         }
 
         private void Btn_addhranu_Click(object sender, EventArgs e)
@@ -68,9 +68,10 @@ namespace Grafy
             mode = "removehranu";
         }
 
-        private void Btn_visual_Click(object sender, EventArgs e)
+        private void StartDFS_Click(object sender, EventArgs e)
         {
-            List<int[]> vypis = Vykresleni.Startviz(Convert.ToInt32(nup_start.Value), Convert.ToInt32(nup_cil.Value), true);
+            List<int[]> vypis = Vykresleni.Startviz(Convert.ToInt32(nup_start.Value), true);
+            txtbx_debug.Text = "";
             for (int i = 0; i < vypis.Count; i++) txtbx_debug.Text += vypis[i][0] + " => " + vypis[i][1] + ", ";
             tim_viz.Start();
         }
@@ -83,7 +84,7 @@ namespace Grafy
 
         private void StartBSF_Click(object sender, EventArgs e)
         {
-            List<int[]> vypis = Vykresleni.Startviz(Convert.ToInt32(nup_start.Value), Convert.ToInt32(nup_cil.Value), false);
+            List<int[]> vypis = Vykresleni.Startviz(Convert.ToInt32(nup_start.Value), false);
             txtbx_debug.Text = "";
             for (int i = 0; i < vypis.Count; i++) txtbx_debug.Text += vypis[i][0] + " => " + vypis[i][1] + ", ";
             tim_viz.Start();

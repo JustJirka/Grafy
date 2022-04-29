@@ -157,7 +157,7 @@ namespace Grafy
             }
             return Bod.Count();
         }
-        public List<int[]> Startviz(int start, int end, bool dfs)
+        public List<int[]> Startviz(int start, bool dfs)
         {
             Graf Grafy = new Graf(spojeni.Count());
             for (int i = 0; i < spojeni.Count(); i++)
@@ -169,8 +169,8 @@ namespace Grafy
             }
             vizual = 0;
             bfs = !dfs;
-            if (dfs) prosly = Grafy.DFS(start, end);
-            else prosly = Grafy.BFS(start, end);
+            if (dfs) prosly = Grafy.DFS(start);
+            else prosly = Grafy.BFS(start);
             return prosly;
         }
         public bool Vizualiz()

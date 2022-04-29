@@ -37,15 +37,12 @@ namespace Grafy
             this.btn_deletebod = new System.Windows.Forms.Button();
             this.btn_deletehranu = new System.Windows.Forms.Button();
             this.nup_start = new System.Windows.Forms.NumericUpDown();
-            this.nup_cil = new System.Windows.Forms.NumericUpDown();
             this.lbl_start = new System.Windows.Forms.Label();
-            this.lbl_cil = new System.Windows.Forms.Label();
             this.btn_visual = new System.Windows.Forms.Button();
             this.tim_viz = new System.Windows.Forms.Timer(this.components);
             this.startBSF = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picbx_grafy)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_start)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nup_cil)).BeginInit();
             this.SuspendLayout();
             // 
             // picbx_grafy
@@ -113,13 +110,6 @@ namespace Grafy
             this.nup_start.Size = new System.Drawing.Size(75, 20);
             this.nup_start.TabIndex = 6;
             // 
-            // nup_cil
-            // 
-            this.nup_cil.Location = new System.Drawing.Point(1004, 563);
-            this.nup_cil.Name = "nup_cil";
-            this.nup_cil.Size = new System.Drawing.Size(75, 20);
-            this.nup_cil.TabIndex = 7;
-            // 
             // lbl_start
             // 
             this.lbl_start.AutoSize = true;
@@ -129,24 +119,15 @@ namespace Grafy
             this.lbl_start.TabIndex = 8;
             this.lbl_start.Text = "Startovní bod";
             // 
-            // lbl_cil
-            // 
-            this.lbl_cil.AutoSize = true;
-            this.lbl_cil.Location = new System.Drawing.Point(940, 565);
-            this.lbl_cil.Name = "lbl_cil";
-            this.lbl_cil.Size = new System.Drawing.Size(58, 13);
-            this.lbl_cil.TabIndex = 9;
-            this.lbl_cil.Text = "Cílový bod";
-            // 
             // btn_visual
             // 
-            this.btn_visual.Location = new System.Drawing.Point(1004, 589);
+            this.btn_visual.Location = new System.Drawing.Point(1004, 563);
             this.btn_visual.Name = "btn_visual";
             this.btn_visual.Size = new System.Drawing.Size(75, 25);
             this.btn_visual.TabIndex = 10;
             this.btn_visual.Text = "DFS";
             this.btn_visual.UseVisualStyleBackColor = true;
-            this.btn_visual.Click += new System.EventHandler(this.Btn_visual_Click);
+            this.btn_visual.Click += new System.EventHandler(this.StartDFS_Click);
             // 
             // tim_viz
             // 
@@ -155,7 +136,7 @@ namespace Grafy
             // 
             // startBSF
             // 
-            this.startBSF.Location = new System.Drawing.Point(923, 591);
+            this.startBSF.Location = new System.Drawing.Point(923, 565);
             this.startBSF.Name = "startBSF";
             this.startBSF.Size = new System.Drawing.Size(75, 23);
             this.startBSF.TabIndex = 11;
@@ -170,9 +151,7 @@ namespace Grafy
             this.ClientSize = new System.Drawing.Size(1091, 638);
             this.Controls.Add(this.startBSF);
             this.Controls.Add(this.btn_visual);
-            this.Controls.Add(this.lbl_cil);
             this.Controls.Add(this.lbl_start);
-            this.Controls.Add(this.nup_cil);
             this.Controls.Add(this.nup_start);
             this.Controls.Add(this.btn_deletehranu);
             this.Controls.Add(this.btn_deletebod);
@@ -184,7 +163,6 @@ namespace Grafy
             this.Text = "Grafy";
             ((System.ComponentModel.ISupportInitialize)(this.picbx_grafy)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nup_start)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nup_cil)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,9 +177,7 @@ namespace Grafy
         private System.Windows.Forms.Button btn_deletebod;
         private System.Windows.Forms.Button btn_deletehranu;
         private System.Windows.Forms.NumericUpDown nup_start;
-        private System.Windows.Forms.NumericUpDown nup_cil;
         private System.Windows.Forms.Label lbl_start;
-        private System.Windows.Forms.Label lbl_cil;
         private System.Windows.Forms.Button btn_visual;
         private System.Windows.Forms.Timer tim_viz;
         private System.Windows.Forms.Button startBSF;
